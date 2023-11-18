@@ -43,6 +43,4 @@ go build -o buddyBot
 
 Send a text message to the bot, and it will respond with a generated message.
 
-- Contributing
-
-[BuddyBot work example](buddyBot_img.png)
+![BuddyBot work example](buddyBot.png)
