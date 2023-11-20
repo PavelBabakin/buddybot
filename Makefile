@@ -23,7 +23,7 @@ build: format
 ifeq ($(VERSION),unknown)
 	@echo "No Git tag found. Skipping build..."
 else
-	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o buddyBot -ldflags "-X=github.com/${REGISTRY}/buddyBot/cmd.appVersion=${VERSION}-${SHORT_HASH}"
+	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o buddyBot -ldflags "-X=github.com/${REGISTRY}/buddyBot/cmd.appVersion=${VERSION}-${SHORT_HASH}"
 endif
 
 image:
