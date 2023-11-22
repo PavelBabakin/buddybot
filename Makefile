@@ -37,7 +37,7 @@ windows:
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-windows-amd64
 
 push:
-	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm64-amd
+	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 
 clean:
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
