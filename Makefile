@@ -8,8 +8,8 @@ LAST_IMAGE := $(shell docker images -q | head -n 1)
 format:
 	gofmt -s -w ./
 
-install-packages:
-	go get -u ./...
+get:
+	go get
 
 lint:
 	@which golint > /dev/null || (echo "Installing golint..." && go get -u golang.org/x/lint/golint)
