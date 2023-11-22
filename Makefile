@@ -25,43 +25,21 @@ else
 endif
 
 linux:
-	make build TARGETOS=linux TARGETARCH=amd64
-
-arm:
-	make build TARGETOS=linux TARGETARCH=arm64
-
-macos:
-	make build TARGETOS=darwin TARGETARCH=amd64
-
-windows:
-	make build TARGETOS=windows TARGETARCH=amd64
-
-image-linux:
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
-image-arm:
-	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-arm64
+arm:
+	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm64-amd
 
-image-macos:
+macos:
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-darwin-amd64
 
-image-windows:
+windows:
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-windows-amd64
 
-push-linux:
-	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
-
-push-arm:
-	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-arm64
-
-push-macos:
-	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-darwin-amd64
-
-push-windows:
-	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-windows-amd64
+push:
+	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm64-amd
 
 clean:
-	rm -rf ${APP}
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-arm64
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-darwin-amd64
