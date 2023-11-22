@@ -6,14 +6,14 @@ SHORT_HASH := $(shell git rev-parse --short HEAD)
 LAST_IMAGE := $(shell docker images -q | head -n 1)
 
 format:
-	go get -u golang.org/x/tools/cmd/gofmt \
+	which gofmt > /dev/null || (echo "Installing gofmt..." && go get -u golang.org/x/tools/cmd/gofmt)
 	gofmt -s -w ./
 
 get:
 	go get
 
 lint:
-	go get -u golang.org/x/lint/golint \
+	which golint > /dev/null || (echo "Installing golint..." && go get -u golang.org/x/lint/golint)
 	golint
 
 test:
