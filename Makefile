@@ -6,7 +6,8 @@ SHORT_HASH := $(shell git rev-parse --short HEAD)
 LAST_IMAGE := $(shell docker images -q | head -n 1)
 
 format:
-	gofmt -s -w ./
+    @which gofmt > /dev/null || (echo "Installing gofmt..." && go get golang.org/x/tools/cmd/gofmt)
+    gofmt -s -w ./
 
 get:
 	go get
