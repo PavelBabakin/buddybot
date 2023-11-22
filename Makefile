@@ -1,14 +1,3 @@
-ifeq '$(findstring ;,$(PATH))' ';'
-    detected_OS := windows
-	detected_arch := amd64
-else
-    detected_OS := $(shell uname | tr '[:upper:]' '[:lower:]' 2> /dev/null || echo Unknown)
-    detected_OS := $(patsubst CYGWIN%,Cygwin,$(detected_OS))
-    detected_OS := $(patsubst MSYS%,MSYS,$(detected_OS))
-    detected_OS := $(patsubst MINGW%,MSYS,$(detected_OS))
-	detected_arch := $(shell dpkg --print-architecture 2>/dev/null || amd64)
-endif
-
 APP := $(shell basename -s .git $(shell git remote get-url origin) | tr '[:upper:]' '[:lower:]')
 REGISTRY := PavelBabakin
 DOCKER_USERNAME := backup0
@@ -17,14 +6,14 @@ SHORT_HASH := $(shell git rev-parse --short HEAD)
 LAST_IMAGE := $(shell docker images -q | head -n 1)
 
 format:
-	@which gofmt > /dev/null || (echo "Installing gofmt..." && go get -u golang.org/x/tools/cmd/gofmt)
+	@which gofmt > /dev/null || $(shell echo "Installing gofmt..." && go get -u golang.org/x/tools/cmd/gofmt)
 	gofmt -s -w ./
 
 get:
 	go get
 
 lint:
-	@which golint > /dev/null || (echo "Installing golint..." && go get -u golang.org/x/lint/golint)
+	@which golint > /dev/null || $(shell echo "Installing golint..." && go get -u golang.org/x/lint/golint)
 	golint
 
 test:
@@ -34,7 +23,7 @@ build: format get
 	ifeq ($(VERSION),unknown)
 		echo "No Git tag found. Skipping build..."
 	else
-		CGO_ENABLED=0 GOOS=${detected_OS} GOARCH=${detected_arch} go build -v -o ${APP} -ldflags "-X=github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}"
+		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X=github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}"
 	endif
 
 linux: format get
