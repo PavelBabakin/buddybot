@@ -42,11 +42,14 @@ dive: arm
 	--ci --lowestEfficiency=0.99 ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 
+image: build
+	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
+
 push:
 	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 
 clean:
-	rm -rf ${APP} ; \
+	@rm -rf ${APP}; \
 	if [ -n "${LAST_IMAGE}" ]; then \
 		docker rmi -f ${LAST_IMAGE}; \
 	else \
