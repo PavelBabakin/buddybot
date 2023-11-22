@@ -1,3 +1,14 @@
+ifeq '$(findstring ;,$(PATH))' ';'
+    detected_OS := windows
+	detected_arch := amd64
+else
+    detected_OS := $(shell uname | tr '[:upper:]' '[:lower:]' 2> /dev/null || echo Unknown)
+    detected_OS := $(patsubst CYGWIN%,Cygwin,$(detected_OS))
+    detected_OS := $(patsubst MSYS%,MSYS,$(detected_OS))
+    detected_OS := $(patsubst MINGW%,MSYS,$(detected_OS))
+	detected_arch := $(shell dpkg --print-architecture 2>/dev/null || amd64)
+endif
+
 APP := $(shell basename -s .git $(shell git remote get-url origin) | tr '[:upper:]' '[:lower:]')
 REGISTRY := PavelBabakin
 DOCKER_USERNAME := backup0
@@ -23,7 +34,7 @@ build: format get
 	ifeq ($(VERSION),unknown)
 		echo "No Git tag found. Skipping build..."
 	else
-		CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o ${APP} -ldflags "-X=github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}"
+		CGO_ENABLED=0 GOOS=${detected_OS} GOARCH=${detected_arch} go build -v -o ${APP} -ldflags "-X=github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}"
 	endif
 
 linux: format get
