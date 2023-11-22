@@ -3,6 +3,7 @@ REGISTRY := PavelBabakin
 DOCKER_USERNAME := backup0
 VERSION := $(shell git describe --tags --abbrev=0 2>/dev/null || echo "unknown")
 SHORT_HASH := $(shell git rev-parse --short HEAD)
+LAST_IMAGE := $(shell docker images -q | head -n 1)
 
 format:
 	gofmt -s -w ./
@@ -45,8 +46,10 @@ push:
 	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 
 clean:
-	rm -rf ${APP}
-	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
-	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
-	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-darwin-amd64
-	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-windows-amd64
+	rm -rf ${APP} ; \
+	if [ -n "${LAST_IMAGE}" ]; then \
+		docker rmi -f ${LAST_IMAGE}; \
+	else \
+		printf "Image not found\n"; \
+	fi
+
