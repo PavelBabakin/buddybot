@@ -18,22 +18,22 @@ test:
 	go test -v
 
 build: get
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}
 
 linux: get
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 arm: get
-	CGO_ENABLED=0 GOOS=arm GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
+	CGO_ENABLED=0 GOOS=arm GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 
 macos: get
-	CGO_ENABLED=0 GOOS=macos GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
+	CGO_ENABLED=0 GOOS=macos GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-darwin-amd64
 
 windows: get
-	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
+	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-windows-amd64
 
 dive: image
