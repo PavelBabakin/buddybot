@@ -21,14 +21,14 @@ export OPEN_AI_TOKEN=your_openai_token
 - Clone the repository:
 
 ```
-git clone https://github.com/yourusername/buddyBot.git
-cd buddyBot
+git clone https://github.com/yourusername/buddybot.git
+cd buddybot
 ```
 
 - Build the binary:
 
 ```
-go build -o buddyBot
+go build -o buddybot
 ```
 
 ## Usage
@@ -36,11 +36,11 @@ go build -o buddyBot
 - Start the bot:
 
 ```
-./buddyBot start
+./buddybot start
 ```
 
 - Interact with the bot:
 
 Send a text message to the bot, and it will respond with a generated message.
 
-![BuddyBot work example](buddyBot.png)
+![BuddyBot work example](buddybot.png)

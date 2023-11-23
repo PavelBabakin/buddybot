@@ -1,4 +1,4 @@
-module github.com/PavelBabakin/buddyBot
+module github.com/PavelBabakin/buddybot
 
 go 1.20
 

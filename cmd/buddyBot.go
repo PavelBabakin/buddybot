@@ -21,17 +21,17 @@ var (
 	OpenAIToken = os.Getenv("OPEN_AI_TOKEN")
 )
 
-// buddyBotCmd represents the buddyBot command
+// buddyBotCmd represents the buddybot command
 var buddyBotCmd = &cobra.Command{
 	Use:   "start",
 	Short: "Starts the BuddyBot Telegram bot",
-	Long: `buddyBot is a Telegram bot powered by OpenAI's GPT-3.5 Turbo.
+	Long: `buddybot is a Telegram bot powered by OpenAI's GPT-3.5 Turbo.
 
 	This bot is designed to provide helpful responses based on user input. You can chat with the bot by sending text messages. The bot will use OpenAI's powerful language model to generate responses.
 	
 	Example:
 	  Start the bot:
-	  $ buddyBot start
+	  $ buddybot start
 	
 	  Interact with the bot:
 	  - Send a text message to the bot, and it will respond with a generated message.
@@ -43,9 +43,9 @@ var buddyBotCmd = &cobra.Command{
 	Note: Make sure to set the TELE_TOKEN and OPEN_AI_TOKEN environment variables before starting the bot.
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("buddyBot %s started", appVersion)
+		fmt.Printf("buddybot %s started", appVersion)
 
-		buddyBot, err := telebot.NewBot(telebot.Settings{
+		buddybot, err := telebot.NewBot(telebot.Settings{
 			URL:    "",
 			Token:  TeleToken,
 			Poller: &telebot.LongPoller{Timeout: 10 * time.Second},
@@ -58,7 +58,7 @@ var buddyBotCmd = &cobra.Command{
 
 		client, req := initOpenAIAPI()
 
-		buddyBot.Handle(telebot.OnText, func(m telebot.Context) error {
+		buddybot.Handle(telebot.OnText, func(m telebot.Context) error {
 			log.Print(m.Message().Payload, m.Text())
 			text := m.Text()
 
@@ -69,7 +69,7 @@ var buddyBotCmd = &cobra.Command{
 			return err
 		})
 
-		buddyBot.Start()
+		buddybot.Start()
 	},
 }
 

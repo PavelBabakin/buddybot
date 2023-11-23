@@ -11,15 +11,15 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "buddyBot",
+	Use:   "buddybot",
 	Short: "Starts the BuddyBot Telegram bot",
-	Long: `buddyBot is a Telegram bot powered by OpenAI's GPT-3.5 Turbo.
+	Long: `buddybot is a Telegram bot powered by OpenAI's GPT-3.5 Turbo.
 
 	This bot is designed to provide helpful responses based on user input. You can chat with the bot by sending text messages. The bot will use OpenAI's powerful language model to generate responses.
 	
 	Example:
 	  Start the bot:
-	  $ buddyBot start
+	  $ buddybot start
 	
 	  Interact with the bot:
 	  - Send a text message to the bot, and it will respond with a generated message.
@@ -49,7 +49,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.buddyBot.yaml)")
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.buddybot.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
