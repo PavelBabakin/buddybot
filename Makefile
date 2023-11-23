@@ -17,22 +17,22 @@ lint:
 test:
 	go test -v
 
-build:
+build: get
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
 
-linux: format get
+linux: get
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
-arm: format get
+arm: get
 	CGO_ENABLED=0 GOOS=arm GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-arm-amd64
 
-macos: format get
+macos: get
 	CGO_ENABLED=0 GOOS=macos GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-darwin-amd64
 
-windows: format get
+windows: get
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -v -o ${APP} -ldflags "-X="github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}
 	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-windows-amd64
 
