@@ -17,7 +17,7 @@ lint:
 test:
 	go test -v
 
-build: format get
+build: get
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o ${APP} -ldflags "-X=github.com/${REGISTRY}/${APP}/cmd.appVersion=${VERSION}-${SHORT_HASH}"
 
 linux: format get
