@@ -1,0 +1,16 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: backup0
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.14-e5c8a6d-linux"
+  arch: amd64
+
+secret:
+  name: buddybot
+  tokenKey: token
+  tokenName: TELE_TOKEN
