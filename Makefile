@@ -1,5 +1,5 @@
 APP := $(shell basename -s .git $(shell git remote get-url origin) | tr '[:upper:]' '[:lower:]')
-REGISTRY ?= gcr.io/quantum-petal-405619/demo
+REGISTRY := ghcr.io/pavelbabakin/buddybot
 DOCKER_USERNAME := backup0
 VERSION := $(shell git describe --tags --abbrev=0 2>/dev/null || echo "unknown")
 SHORT_HASH := $(shell git rev-parse --short HEAD)
