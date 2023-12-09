@@ -15,16 +15,26 @@ jobs:
 
       - name: Run test
         run: make test
-      - name: Docker Hub login
+      
+      - name: Login to GCR
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build&Push
         env:
           APP: "buddybot"
-          REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
+          REGISTRY: ghcr.io/${{ github.actor }}
         run: make image push
+
+      - name: Clean
+        env:
+          APP: "buddybot"
+          REGISTRY: ghcr.io/${{ github.actor }}
+        run: make clean
+
 
   cd:
     name: CD
