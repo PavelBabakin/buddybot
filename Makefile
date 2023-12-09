@@ -1,5 +1,5 @@
 APP := $(shell basename -s .git $(shell git remote get-url origin) | tr '[:upper:]' '[:lower:]')
-REGISTRY := PavelBabakin
+REGISTRY ?= gcr.io/quantum-petal-405619/demo
 DOCKER_USERNAME := backup0
 VERSION := $(shell git describe --tags --abbrev=0 2>/dev/null || echo "unknown")
 SHORT_HASH := $(shell git rev-parse --short HEAD)
@@ -42,10 +42,10 @@ dive: image
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 image:
-	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 push:
-	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
+	docker push ${REGISTRY}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 clean:
 	@rm -rf ${APP}; \
