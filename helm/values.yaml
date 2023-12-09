@@ -5,9 +5,11 @@
 replicaCount: 1
 
 image:
+  registry: "ghcr.io"
   repository: backup0
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.0.14-e5c8a6d-linux"
+  os: linux
   arch: amd64
 
 secret:
