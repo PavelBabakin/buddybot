@@ -3,15 +3,13 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
 image:
   registry: "ghcr.io"
   repository: backup0
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.14-e5c8a6d-linux"
+  tag: "v.1.0.15-d596bde"
   os: linux
   arch: amd64
-
 secret:
   name: buddybot
   tokenKey: token
