@@ -42,10 +42,10 @@ dive: image
 	docker rmi -f ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 image:
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
+	docker build . -t ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
+	docker push ${DOCKER_USERNAME}/${APP}:${VERSION}-${SHORT_HASH}-linux-amd64
 
 clean:
 	@rm -rf ${APP}; \
