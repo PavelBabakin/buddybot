@@ -7,7 +7,7 @@ image:
   registry: "ghcr.io"
   repository: backup0
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.19-a2ba289"
+  tag: "v1.0.19-8b48b93"
   os: linux
   arch: amd64
 secret:
