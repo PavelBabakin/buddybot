@@ -17,8 +17,7 @@ import (
 
 var (
 	// TeleToken bot
-	// TeleToken   = os.Getenv("TELE_TOKEN")
-	TeleToken   = "6859285014:AAEehgd1_ANSFF6vnWS1DUsa5DC7WN4fSj"
+	TeleToken   = os.Getenv("TELE_TOKEN")
 	OpenAIToken = os.Getenv("OPEN_AI_TOKEN")
 )
 
