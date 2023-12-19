@@ -47,7 +47,7 @@ Send a text message to the bot, and it will respond with a generated message.
 
 # Gitleaks in pre-commit hook
 
-To use `gitleak` in pre-commit hook, simply create (if not exist) file `pre-commit` in `.git/hooks/` folder and place this code in it
+To use `gitleaks` in pre-commit hook, simply create (if not exist) file `pre-commit` in `.git/hooks/` folder and place this code in it
 
 ```
 #!/bin/bash
